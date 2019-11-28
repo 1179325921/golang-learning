@@ -1,0 +1,39 @@
+package main
+
+import (
+	"fmt"
+)
+
+var ch1 chan int
+var ch2 chan int
+var chs = []chan int{ch1, ch2}
+var numbers = []int{1, 2, 3, 4, 5}
+var ch3 = make(chan int, 1)
+
+func main() {
+	ch3 <- 3
+	select {
+	case getChan(0) <- getNumber(2):
+
+		fmt.Println("1th case is selected.")
+	case getChan(1) <- getNumber(3):
+
+		fmt.Println("2th case is selected.")
+
+	case <-ch3:
+		fmt.Println("ch3 selected")
+
+	default:
+
+		fmt.Println("do nothing!")
+	}
+}
+
+func getNumber(i int) int {
+	fmt.Printf("numbers[%d]\n", i)
+	return numbers[i]
+}
+func getChan(i int) chan int {
+	fmt.Printf("chs[%d]\n", i)
+	return chs[i]
+}
