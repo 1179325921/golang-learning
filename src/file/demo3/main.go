@@ -14,7 +14,6 @@ func main() {
 	}
 	defer file.Close()
 	writer := bufio.NewWriter(file)
-
 	str := "你好，golang\r\n"
 	for i := 0; i < 5; i++ {
 		_, e := writer.WriteString(str)
